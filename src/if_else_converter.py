@@ -14,10 +14,10 @@ def identify_if_else_type(if_else_statement):
     else_count = len(re.findall(r'else', if_else_statement))
     if if_count > 1 or else_count > 1:
         # Check for Type 5: Multiple else if conditions
-        elif_count = len(re.findall(r'else if\s*\(', if_else_statement))
-        if elif_count >= 3:
-            return "Type 5"
-        return "Type 4"
+        else_count = len(re.findall(r'else if\s*\(', if_else_statement))
+        if else_count > 1:
+            return "Type 4"
+        return "Type 5"
     else:
         return "Type 2"
 
@@ -151,7 +151,7 @@ def process_type_3(if_else_statement):
     return output
 
 
-def process_type_4(if_else_statement):
+def process_type_5(if_else_statement):
     ftl_output = []
     lines = if_else_statement.strip().splitlines()
 
@@ -203,7 +203,7 @@ def process_type_4(if_else_statement):
     return output
 
 
-def process_type_5(if_else_statement):
+def process_type_4(if_else_statement):
     # Helper function to process conditions within if-else statements
     def process_conditions(dwl_code):
         # Replace "else if" with <#elseif>, then "if" with <#if>, and "else" with <#else>
